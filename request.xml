@@ -1,0 +1,6 @@
+<!-- request for crew member 8 -->
+<body>
+  <p:select_with_key_crew_operation xmlns:p="http://ws.wso2.org/dataservice">
+    <xs:crew_id xmlns:xs="http://ws.wso2.org/dataservice">8</xs:crew_id>
+  </p:select_with_key_crew_operation>
+</body>
