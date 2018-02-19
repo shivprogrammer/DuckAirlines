@@ -12,3 +12,10 @@ SELECT first_name, last_name, flight_date, duration, DATE_ADD(flight_date, INTER
 FROM pilot_logs
 JOIN crew ON crew.crew_id = pilot_logs.crew_id
 ORDER BY flight_date DESC;
+
+--------
+SELECT (ma.airframe_hours_due - fl.airframe-hours) AS available_hours
+FROM maintenance ma
+JOIN fleet fl ON fl.fleet = wa.fleet_id
+WHERE ma.airframe_hours_due > fl.airframe_hours
+ORDER BY available_hours DESC;
