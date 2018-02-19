@@ -22,3 +22,8 @@ WHERE ma.airframe_hours_due > fl.airframe_hours
 ORDER BY available_hours DESC;
 
 -- there is not a plane identifier, so that needs to be added
+SELECT fl.tail_number, (ma.airframe_hours_due - fl.airframe_hours) AS available_hours
+FROM maintenance ma
+JOIN fleet fl ON fl.fleet_id = ma.fleet_id
+WHERE ma.airframe_hours_due > fl.airframe_hours
+ORDER BY available_hours DESC;
