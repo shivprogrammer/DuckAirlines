@@ -5,3 +5,10 @@ SELECT flight_date FROM pilot_logs ORDER BY flight_date DESC;
 
 SELECT flight_date, duration, DATE_ADD(flight_date, INTERVAL duration HOUR) AS flight_end_time
 FROM pilot_logs ORDER BY flight_date DESC;
+
+-- But, this isn't that helpful because we don't have the names of the pilots associated with the table information
+-- So, to add their names to the table:
+SELECT first_name, last_name, flight_date, duration, DATE_ADD(flight_date, INTERVAL duration HOUR) AS flight_end_time
+FROM pilot_logs
+JOIN crew ON crew.crew_id = pilot_logs.crew_id
+ORDER BY flight_date DESC;
