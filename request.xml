@@ -4,3 +4,13 @@
     <xs:crew_id xmlns:xs="http://ws.wso2.org/dataservice">8</xs:crew_id>
   </p:select_with_key_crew_operation>
 </body>
+
+<!-- received response -->
+<crewCollection xmlns="http://ws.wso2.org/dataservice">
+   <crew>
+      <crew_id>8</crew_id>
+      <crew_type>pilot</crew_type>
+      <first_name>Kelly</first_name>
+      <last_name>White</last_name>
+   </crew>
+</crewCollection>
