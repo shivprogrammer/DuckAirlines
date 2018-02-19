@@ -27,3 +27,11 @@ FROM maintenance ma
 JOIN fleet fl ON fl.fleet_id = ma.fleet_id
 WHERE ma.airframe_hours_due > fl.airframe_hours
 ORDER BY available_hours DESC;
+
+
+----------------
+--The original pilot query slightly rewritten
+SELECT cr.first_name, cr.last_name, pl.flight_date, pl.duration, DATE_ADD(pl.flight_date, INTERVAL pl.duration HOUR) AS flight_end_time
+FROM pilot_logs pl
+JOIN crew cr on cr.crew_id = pl.crew_id
+ORDER BY flight_end_time DESC;
