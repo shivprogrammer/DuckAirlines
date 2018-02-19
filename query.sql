@@ -35,3 +35,9 @@ SELECT cr.first_name, cr.last_name, pl.flight_date, pl.duration, DATE_ADD(pl.fli
 FROM pilot_logs pl
 JOIN crew cr on cr.crew_id = pl.crew_id
 ORDER BY flight_end_time DESC;
+
+-- for the Carbon Server
+SELECT cr.first_name, cr.last_name,
+pl.flight_date, pl.duration
+FROM pilot_logs pl
+JOIN crew cr on cr.crew_id = pl.crew_id;
