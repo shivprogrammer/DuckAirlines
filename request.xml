@@ -14,3 +14,13 @@
       <last_name>White</last_name>
    </crew>
 </crewCollection>
+
+<!-- ------------------------------- -->
+
+<!-- GetFlightsForAircraftByTailNumber Request -->
+<body>
+   <p:GetFlightsForAircraft xmlns:p="http://ws.wso2.org/dataservice">
+      <!--Exactly 1 occurrence-->
+      <xs:param0 xmlns:xs="http://ws.wso2.org/dataservice">N657FM</xs:param0>
+   </p:GetFlightsForAircraft>
+</body>
