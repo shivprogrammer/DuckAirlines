@@ -1,4 +1,4 @@
---------- A Query for Qualified Pilots ------------
+---------------------------- A Query for Qualified Pilots ---------------------------------
 SELECT flight_date FROM pilot_logs ORDER BY flight_date DESC;
 
 -- so, because even though the pilot could be able to legal to fly by the time planes take off, he may not be legal to fly by the time that the flight lands due to the duration of the flight.
@@ -14,7 +14,7 @@ FROM pilot_logs
 JOIN crew ON crew.crew_id = pilot_logs.crew_id
 ORDER BY flight_date DESC;
 
--------- A Query for the Acceptable Planes ------------
+--------------------------- A Query for the Acceptable Planes ------------------------------
 SELECT (ma.airframe_hours_due - fl.airframe-hours) AS available_hours
 FROM maintenance ma
 JOIN fleet fl ON fl.fleet = wa.fleet_id
@@ -41,3 +41,9 @@ SELECT cr.first_name, cr.last_name,
 pl.flight_date, pl.duration
 FROM pilot_logs pl
 JOIN crew cr on cr.crew_id = pl.crew_id;
+
+-----------------------------------------------------------------------
+--A query to look up flights that a particular plane has made
+SELECT passenger_count, distance, flight_number, departure_time, arrival_time, departure_airport, arrival_airport
+FROM flights
+JOIN fleet on fleet.fleet_id = flights.fleet_id
