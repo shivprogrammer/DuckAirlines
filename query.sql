@@ -47,3 +47,4 @@ JOIN crew cr on cr.crew_id = pl.crew_id;
 SELECT passenger_count, distance, flight_number, departure_time, arrival_time, departure_airport, arrival_airport
 FROM flights
 JOIN fleet on fleet.fleet_id = flights.fleet_id
+WHERE tail_number = 'N657FM'
