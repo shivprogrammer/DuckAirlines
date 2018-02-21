@@ -1,38 +1,34 @@
 <data name="GetAircraftForFlight" transports="http https local" serviceStatus="active">
-  <config id="DuckAirlinesDB">
-    <property name="driverClassName">com.mysql.jdbc.Driver</property>
-    <property name="url">jdbc:mysql://localhost:3306/duckairlines</property>
-    <property name="username">shivvy</property>
-    <property name="password">admin123</property>
-  </config>
-  <query id="GetAircraftList" userConfig="DuckAirlinesDB">
-    <sql>
-      SELECT ac.aircraft_name, fl.tail_number, ma.airframe_hours_due, airframe_hours
-      FROM maintenance ma
-      JOIN fleet fl ON fl.fleet_id = ma.fleet_id
-      JOIN aircraft ac ON fl.aircraft_id = ac.aircraft_id
-      WHERE ma.airframe_hours_due > fl.airframe_hours;
-    </sql>
-    <sql dialect="sql">
-      SELECT ac.aircraft_name, fl.tail_number, (ma.airframe_hours_due - fl.airframe_hours) AS available_hours
-      FROM maintenance ma
-      JOIN fleet fl ON fl.fleet_id = ma.fleet_id
-      JOIN aircraft ac ON fl.aircraft_id = ac.aircraft_id
-      WHERE ma.airframe_hours_due > fl.airframe_hours
-      ORDER BY available_hours DESC;
-    </sql>
-    <result element="AircraftList" rowName="Aircraft">
-      <element column="aircraft_name" name="AircraftName" xsdType="string" />
-      <element column="tail_number" name="TailNumber" xsdType="string" />
-      <element column="airframe_hours_due" name="AirframeHoursDue" xsdType="int" />
-      <element column="airframe_hours" name="AirframeHours" xsdType="int" />
-      <element column="available_hours" name="AvailableHours" xsdType="int" />
-    </result>
-  </query>
-  <operation name="GetAircraft">
-    <call-query href="GetAircraftList" />
-  </operation>
-  <resource method="GET" path="aircraft">
-    <call-query href="GetAircraft" />
-  </resource>
+   <config id="DuckAirlinesDB">
+      <property name="driverClassName">com.mysql.jdbc.Driver</property>
+      <property name="url">jdbc:mysql://localhost:3306/duckairlines</property>
+      <property name="username">shivvy</property>
+      <property name="password">admin123</property>
+   </config>
+   <query id="GetAircraftList" useConfig="DuckAirlinesDB">
+      <sql>SELECT ac.aircraft_name, fl.tail_number, ma.airframe_hours_due, fl.airframe_hours
+      	FROM maintenance ma
+      	JOIN fleet fl ON fl.fleet_id = ma.fleet_id
+      	JOIN aircraft ac ON fl.aircraft_id = ac.aircraft_id
+      	WHERE ma.airframe_hours_due > fl.airframe_hours</sql>
+      <sql dialect="mysql">SELECT ac.aircraft_name, fl.tail_number, (ma.airframe_hours_due - fl.airframe_hours) AS available_hours
+      		FROM maintenance ma
+      		JOIN fleet fl ON fl.fleet_id = ma.fleet_id
+      		JOIN aircraft ac ON fl.aircraft_id = ac.aircraft_id
+      		WHERE ma.airframe_hours_due > fl.airframe_hours
+      		ORDER BY available_hours DESC</sql>
+      <result element="AircraftList" rowName="Aircraft">
+         <element column="aircraft_name" name="AircraftName" xsdType="string" />
+         <element column="tail_number" name="TailNumber" xsdType="string" />
+         <element column="airframe_hours_due" name="AirframeHoursDue" xsdType="int" />
+         <element column="airframe_hours" name="AirframeHours" xsdType="int" />
+         <element column="available_hours" name="AvailableHours" xsdType="int" />
+      </result>
+   </query>
+   <operation name="GetAircraft">
+      <call-query href="GetAircraftList"/>
+   </operation>
+   <resource method="GET" path="aircraft">
+      <call-query href="GetAircraftList"/>
+   </resource>
 </data>
