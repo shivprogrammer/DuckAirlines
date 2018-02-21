@@ -5,9 +5,7 @@
     <property name="username">shivvy</property>
     <property name="password">admin123</property>
   </config>
-  <query id="GetAircraftList" userConfig="DuckAirlinesDB"> <!-- referenced in operation below -->
-    <!-- if we were passing input parameters to our query
-    <param name="param0" sqlType="string" paramType="SCALAR" /> -->
+  <query id="GetAircraftList" userConfig="DuckAirlinesDB">
     <sql>
       SELECT ac.aircraft_name fl.tail_number, ma.airframe_hours_due, airframe_hours
       FROM maintenance ma
@@ -32,13 +30,9 @@
     </result>
   </query>
   <operation name="GetAircraft">
-    <!-- if we were passing an input attribute to the query
-    <with-param name="TailNumber" query-param="tail_number" /> -->
-    <call-query href="GetAircraftList" /> <!-- name of query defined above -->
+    <call-query href="GetAircraftList" />
   </operation>
   <resource method="GET" path="aircraft">
-    <!-- if we were passing parameters to the resource
-    <with-param name="TailNumber" query-param="tail_number" /> -->
     <call-query href="GetAircraft" />
   </resource>
 </data>
