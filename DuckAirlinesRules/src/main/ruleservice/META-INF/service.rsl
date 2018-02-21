@@ -1,0 +1,3 @@
+<ruleService xmlns="http://wso2.org/carbon/rules" name="CreateFlight" targetNamespace="http://com.duckairlines.flights">
+    <ruleSet/>
+</ruleService>
