@@ -21,7 +21,7 @@
       WHERE ma.airframe_hours_due > fl.airframe_hours
       ORDER BY available_hours DESC;
     </sql>
-    <result element-"AircraftList" rowName="Aircraft">
+    <result element="AircraftList" rowName="Aircraft">
       <element column="aircraft_name" name="AircraftName" xsdType="string" />
       <element column="tail_number" name="TailNumber" xsdType="string" />
       <element column="airframe_hours_due" name="AirframeHoursDue" xsdType="int" />
