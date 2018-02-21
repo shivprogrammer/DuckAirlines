@@ -6,6 +6,8 @@
     <property name="password">admin123</property>
   </config>
   <query id="GetAircraftList" userConfig="DuckAirlinesDB">
+    <!-- if we were passing input parameters to our query
+    <param name="param0" sqlType="string" paramType="SCALAR" /> -->
     <sql>
       SELECT ac.aircraft_name fl.tail_number, ma.airframe_hours_due, airframe_hours
       FROM maintenance ma
