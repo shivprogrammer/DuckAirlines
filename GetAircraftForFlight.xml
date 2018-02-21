@@ -1,2 +1,8 @@
-<data name="GetAircraftForFlight" transports="http https local" serviceStatus="active">
+<data name="GetAircraftForFlight" transports="http https local" serviceStatus="active>
+  <config id="DuckAirlines>
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://localhost:3306/duckairlines</property>
+    <property name="username">shivvy</property>
+    <property name="password">admin123</property>
+  </config>
 </data>
