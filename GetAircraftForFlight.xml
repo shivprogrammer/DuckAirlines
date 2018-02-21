@@ -13,4 +13,12 @@
       JOIN aircraft ar ON fl.aircraft_id = ac.aircraft_id
       WHERE ma.airframe_hours_due > fl.airframe_hours
     </sql>
+    <sql dialect="sql">
+      SELECT ac.airframe, fl.tail)number, (ma.airframe_hours_due - fl.airframe_hours) AS available_hours
+      FROM maintenance ma
+      JOIN fleet fl ON fl.fleet_id = ma.fleet_id
+      JOIN aircraft ac ON fl.aircraft_id = ac.aircraft_id
+      WHERE ma.airframe_hours_due > fl.airframe_hours
+      ORDER BY available_hours DESC
+    </sql>
 </data>
