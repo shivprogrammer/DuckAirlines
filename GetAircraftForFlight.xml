@@ -5,4 +5,12 @@
     <property name="username">shivvy</property>
     <property name="password">admin123</property>
   </config>
+  <query id="GetAircraftList" userConfig="DuckAirlinesDB">
+    <sql>
+      SELECT ac.aircraft_name fl.tail_number, ma.airframe_hours_due, airframe_hours
+      FROM maintenance ma
+      JOIN fleet fl ON fl.fleet_id = ma.fleet_id
+      JOIN aircraft ar ON fl.aircraft_id = ac.aircraft_id
+      WHERE ma.airframe_hours_due > fl.airframe_hours
+    </sql>
 </data>
