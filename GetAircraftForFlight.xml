@@ -36,4 +36,7 @@
     <with-param name="TailNumber" query-param="tail_number" /> -->
     <call-query href="GetAircraftList" /> <!-- name of query defined above -->
   </operation>
+  <resource method="GET" path="aircraft">
+    <call-query href="GetAircraft" />
+  </resource>
 </data>
