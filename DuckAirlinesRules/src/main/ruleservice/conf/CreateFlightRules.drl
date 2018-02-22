@@ -26,7 +26,7 @@ rule "Aircraft Has Range"
         insertLogical(flightError);
 end
 
-rule "Runway is Long Enough for Takeoff"
+rule "Runway Is Long Enough for Takeoff"
     
     salience 0
     
@@ -43,4 +43,23 @@ rule "Runway is Long Enough for Takeoff"
         + $metadata.getOriginatingAirportRunwayLength()
         + " feet long.");
         insertLogical(flightError);
+end
+
+rule "Runway Is Long Enough For Landing"
+
+	salience 0
+	
+	when
+		$metadata : FlightMetadata(
+				aircraftLandingRollout > destinationAirportRunwayLength)
+	
+	then
+		FlightError flightError = new FlightError();
+		flightError.setErrorReason("The runway is too short for "
+		+ "this aircraft to land. The plane needs "
+		+ $metadata.getAircraftLandingRollout()
+		+ " feet to land and the runway is "
+		+ $metadata.getOriginatingAirportRunwayLength()
+		+ " feet long.");
+		insertLogical(flightError);		
 end
