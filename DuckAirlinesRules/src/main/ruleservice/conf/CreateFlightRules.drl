@@ -3,19 +3,28 @@ package DuckAirlinesRules
 
 //list any import classes here.
 
-
+import com.duckair.rule.facts.FlightMetadata;
+import com.duckair.rule.facts.FlightError;
 
 //declare any global variables here
 
 
 
 
-rule "Your First Rule"
+rule "Aircraft Has Range"
+
+	salience 0
 
     when
         //conditions
+        $metadata : FlightMetadata(distanceOfFlight > aircraftRange)
     then
         //actions
+        FlightError flightError = new FlightError();
+        flightError.setErrorReason("This aircraft does not have the "
+        + "range to make the flight. The distance of the flight is "
+        + $metadata.getDistanceOfFlight() + " and the aircraft can "
+        + "only fly " + $metadata.getAircraftRange() + " miles.");
 
 end
 
