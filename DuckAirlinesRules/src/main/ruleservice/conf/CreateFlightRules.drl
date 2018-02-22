@@ -9,8 +9,6 @@ import com.duckair.rule.facts.FlightError;
 //declare any global variables here
 
 
-
-
 rule "Aircraft Has Range"
 
 	salience 0
@@ -25,14 +23,24 @@ rule "Aircraft Has Range"
         + "range to make the flight. The distance of the flight is "
         + $metadata.getDistanceOfFlight() + " and the aircraft can "
         + "only fly " + $metadata.getAircraftRange() + " miles.");
-
+        insertLogical(flightError);
 end
 
-rule "Your Second Rule"
-    //include attributes such as "salience" here...
+rule "Runway is Long Enough for Takeoff"
+    
+    salience 0
+    
     when
-        //conditions
+    	$metadata : FlightMetadata(
+    			aircraftTakeoffRoll > originatingAirportRunwayLength)
+    			
     then
-        //actions
-
+        FlightError flightError = new FlightError();
+        flightError.setErrorReason("The runway is too short for "
+        + "this aircraft to takeoff. The plan needs "
+        + $metadata.getAircraftTakeoffRoll() + " feet to take "
+        + "off and the runway is "
+        + $metadata.getOriginatingAirportRunwayLength()
+        + " feet long.");
+        insertLogical(flightError);
 end
