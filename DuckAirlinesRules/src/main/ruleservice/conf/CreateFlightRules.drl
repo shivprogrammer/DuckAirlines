@@ -63,3 +63,18 @@ rule "Runway Is Long Enough For Landing"
 		+ " feet long.");
 		insertLogical(flightError);		
 end
+
+rule "Pilot Has Rating For Aircraft"
+
+	salience 0
+	
+	when
+		$metadata : FlightMetadata(aircraftType != pilotRating)
+	then
+		FlightError flightError = new FlightError();
+		FlightError.setErrorReason("The pilot does not have "
+		+ "the license to fly this plane. Tjhe plane is a "
+		+ $metadata.getAircraftType() + " and the pilot is "
+		+ "rated for a " + $metadata.getPilotRating());
+		insertLogical(flightError);
+end
